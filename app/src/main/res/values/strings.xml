@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Management</string>
+    <string name="employee_id_label"><![CDATA[<< Employee ID]]></string>
+    <string name="employee_id">Employee ID</string>
+    <string name="gmail_tail"><![CDATA[<< @gmail.com]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
