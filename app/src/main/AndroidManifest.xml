@@ -25,13 +25,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.MessengerActivity"></activity>
+        <activity
+            android:name=".activities.MessengerActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".activities.EditProfileActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -42,7 +44,7 @@
 
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

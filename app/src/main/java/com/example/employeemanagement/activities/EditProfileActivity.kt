@@ -86,9 +86,7 @@ class EditProfileActivity : FireBaseAdapter(), Support {
         saveEmail.setOnClickListener(clickListener)
         savePass.setOnClickListener(clickListener)
         saveInfo.setOnClickListener(clickListener)
-
-        certificate.onFocusChangeListener = focusListener
-        description.onFocusChangeListener = focusListener
+        
         close.setOnClickListener(clickListener)
 
         i = findViewById<LinearLayout>(R.id.main_layout).layoutParams.height
@@ -253,9 +251,6 @@ class EditProfileActivity : FireBaseAdapter(), Support {
             params.height = ViewGroup.LayoutParams.WRAP_CONTENT
         else if(params.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
             params.height = i
-            layout.children.forEach {
-                it.isEnabled = false
-            }
         }
 
         layout.layoutParams = params
@@ -263,33 +258,6 @@ class EditProfileActivity : FireBaseAdapter(), Support {
 
     private fun TextView.underLine(){
             paintFlags = paintFlags or Paint.UNDERLINE_TEXT_FLAG
-    }
-
-    private val focusListener = View.OnFocusChangeListener{ view,  hasFocus ->
-        when (view.id){
-            R.id.certificate -> {
-                if(hasFocus){
-                    birthday.visibility = View.GONE
-                    phoneNum.visibility = View.GONE
-                }
-                else{
-                    birthday.visibility = View.VISIBLE
-                    phoneNum.visibility = View.VISIBLE
-                }
-            }
-            R.id.description -> {
-                if(hasFocus){
-                    birthday.visibility = View.GONE
-                    phoneNum.visibility = View.GONE
-                    certificate.visibility = View.GONE
-                }
-                else{
-                    birthday.visibility = View.VISIBLE
-                    phoneNum.visibility = View.VISIBLE
-                    certificate.visibility = View.VISIBLE
-                }
-            }
-        }
     }
 
     /*private fun isTimeOut() : Boolean{

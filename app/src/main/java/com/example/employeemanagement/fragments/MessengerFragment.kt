@@ -1,6 +1,7 @@
 package com.example.employeemanagement.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,10 +45,17 @@ class MessengerFragment : Fragment() {
             .addValueEventListener(object : GetValues(context){
                 override fun onDataChange(data: DataSnapshot) {
                     data.children.forEach {
-                        if(it.value.toString().trim() != firebaseAdapter.getUid()){
+                        if(it.child("Account ID").value.toString().trim()
+                            == firebaseAdapter.getUid()){
+                            Log.i("Messenger", "Don't show current user")
+                        }else{
                             mNameList.add(it.child("Full Name").value.toString().trim())
-                            mMessList.add(it.child("Messenger").value.toString().trim())
                             mImgUrlList.add(it.child("ImageUrl").value.toString().trim())
+
+                            if (it.child("Messenger").exists())
+                                mMessList.add(it.child("Messenger").value.toString().trim())
+                            else
+                                mMessList.add("Click to send a new message")
                         }
                     }
                     setRecycleView(mess_recycle, mNameList, mMessList, mImgUrlList)

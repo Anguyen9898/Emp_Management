@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search"
-            android:background="@drawable/edittext_background"
+            android:background="@drawable/mess_background"
             android:drawableLeft="@drawable/ic_search"
             android:padding="10dp"
             android:layout_alignParentTop="true"
