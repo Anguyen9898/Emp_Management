@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.children
 import com.example.employeemanagement.R
-import com.example.employeemanagement.models.adapters.FireBaseAdapter
-import com.example.employeemanagement.models.adapters.GetValues
+import com.example.employeemanagement.adapters.Firebase.FireBaseAdapter
+import com.example.employeemanagement.adapters.Firebase.GetFirebaseValues
 import com.example.employeemanagement.supporters.interfaces.Support
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -128,7 +127,7 @@ class EditProfileActivity : FireBaseAdapter(), Support {
                     hasMap["Full Name"] = strFullName
 
                     employeesRefWithUid().child("Position")
-                        .addValueEventListener(object : GetValues(this) {
+                        .addValueEventListener(object : GetFirebaseValues(this) {
                             override fun onDataChange(data: DataSnapshot) {
                                 reference.child("Positions")
                                     .child(data.value.toString().trim())

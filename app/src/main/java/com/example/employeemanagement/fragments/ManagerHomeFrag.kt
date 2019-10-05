@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.employeemanagement.R
-import com.example.employeemanagement.models.adapters.FireBaseAdapter
+import com.example.employeemanagement.adapters.Firebase.FireBaseAdapter
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
-import com.example.employeemanagement.models.adapters.GetCurrentLocation
-import com.example.employeemanagement.models.adapters.GetValues
+import com.example.employeemanagement.adapters.GetCurrentLocation
+import com.example.employeemanagement.adapters.Firebase.GetFirebaseValues
 import com.example.employeemanagement.supporters.MarkerAnimation
 import com.example.employeemanagement.supporters.interfaces.Support
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -81,7 +81,7 @@ class ManagerHomeFrag(private var mMap: GoogleMap? = null): GetCurrentLocation(n
         hashMap["Latitude"] = latitude
         hashMap["Longitude"] = longitude
         firebaseAdapter.managerRefWithUid().apply {
-               addValueEventListener(object : GetValues(context) {
+               addValueEventListener(object : GetFirebaseValues(context) {
                    override fun onDataChange(data: DataSnapshot) {
                        currentLocation = mMap!!.addMarker(MarkerOptions()
                                .position(latLng)
@@ -100,7 +100,7 @@ class ManagerHomeFrag(private var mMap: GoogleMap? = null): GetCurrentLocation(n
 
     private fun getStaffLocation(){
         firebaseAdapter.staffReference()
-            .addValueEventListener(object : GetValues(context){
+            .addValueEventListener(object : GetFirebaseValues(context){
                 override fun onDataChange(data: DataSnapshot) =
                     data.children.forEach {
                         if (it.hasChild("Location")){

@@ -1,17 +1,12 @@
-package com.example.employeemanagement.models.adapters
+package com.example.employeemanagement.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.employeemanagement.R
-import com.example.employeemanagement.models.EmployeeDetail
-import com.google.firebase.auth.FirebaseUser
-import de.hdodenhof.circleimageview.CircleImageView
 
 class ProfileAdapter(private var mContext: Context,
                      private var mListField: List<String>,

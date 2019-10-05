@@ -1,4 +1,4 @@
-package com.example.employeemanagement.models.adapters
+package com.example.employeemanagement.adapters.Firebase
 
 import android.annotation.SuppressLint
 import com.example.employeemanagement.supporters.interfaces.Firebase
@@ -6,7 +6,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 
 @SuppressLint("Registered")
-class AccountAdapter : FireBaseAdapter(), Firebase {
+class AccountFirebaseAdapter : FireBaseAdapter(), Firebase {
     private var registerResult: Task<AuthResult>? = null
     private var loginResult: Task<AuthResult>? = null
 

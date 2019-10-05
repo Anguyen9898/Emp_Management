@@ -7,8 +7,8 @@ import com.example.employeemanagement.fragments.ManagerHomeFrag
 import com.example.employeemanagement.fragments.MessengerFragment
 import com.example.employeemanagement.fragments.ProfileFragment
 import com.example.employeemanagement.fragments.StaffHomeFrag
-import com.example.employeemanagement.models.adapters.FireBaseAdapter
-import com.example.employeemanagement.models.adapters.GetValues
+import com.example.employeemanagement.adapters.Firebase.FireBaseAdapter
+import com.example.employeemanagement.adapters.Firebase.GetFirebaseValues
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -65,7 +65,7 @@ class MainActivity : FireBaseAdapter() {
 
     private fun setHomeFragment(){
        employeesRefWithUid().child("Position")
-            .addValueEventListener(object : GetValues(this){
+            .addValueEventListener(object : GetFirebaseValues(this){
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     when (dataSnapshot.value.toString()) {
                         "Manager" -> selectedFragment = ManagerHomeFrag()

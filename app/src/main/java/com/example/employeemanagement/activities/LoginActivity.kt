@@ -9,10 +9,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.employeemanagement.R
-import com.example.employeemanagement.models.adapters.AccountAdapter
-import com.example.employeemanagement.models.adapters.EmployeesAdapter
-import com.example.employeemanagement.models.adapters.FireBaseAdapter
-import com.example.employeemanagement.models.adapters.GetValues
+import com.example.employeemanagement.adapters.Firebase.AccountFirebaseAdapter
+import com.example.employeemanagement.adapters.Firebase.EmployeesFirebaseAdapter
+import com.example.employeemanagement.adapters.Firebase.FireBaseAdapter
+import com.example.employeemanagement.adapters.Firebase.GetFirebaseValues
 import com.example.employeemanagement.supporters.interfaces.Support
 import com.example.employeemanagement.view.LoginView
 import com.google.firebase.auth.FirebaseAuth
@@ -33,8 +33,9 @@ class LoginActivity : FireBaseAdapter(), LoginView,
     var mBundle: Bundle? =null
     var position= ""
 
-    private val account = AccountAdapter()
-    private val employees = EmployeesAdapter()
+    private val account = AccountFirebaseAdapter()
+    private val employees =
+        EmployeesFirebaseAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +90,7 @@ class LoginActivity : FireBaseAdapter(), LoginView,
 
         account.login(strEmail, strPassword).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                employeesRefWithUid().addValueEventListener(object : GetValues(this) {
+                employeesRefWithUid().addValueEventListener(object : GetFirebaseValues(this) {
                     override fun onDataChange(data: DataSnapshot) {
                         progressDialog.dismiss()
 

@@ -1,15 +1,14 @@
-package com.example.employeemanagement.models.adapters
+package com.example.employeemanagement.adapters.Firebase
 
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-abstract class GetValues(var mContext: Context? = null) : ValueEventListener {
+abstract class GetFirebaseValues(var mContext: Context? = null) : ValueEventListener {
 
     abstract override fun onDataChange(data: DataSnapshot)
 

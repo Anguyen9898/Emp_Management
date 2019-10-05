@@ -19,14 +19,14 @@ import com.bumptech.glide.Glide
 
 import com.example.employeemanagement.R
 import com.example.employeemanagement.activities.EditProfileActivity
-import com.example.employeemanagement.models.adapters.FireBaseAdapter
-import com.example.employeemanagement.models.adapters.GetValues
+import com.example.employeemanagement.adapters.Firebase.FireBaseAdapter
+import com.example.employeemanagement.adapters.Firebase.GetFirebaseValues
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import de.hdodenhof.circleimageview.CircleImageView
 
-import com.example.employeemanagement.models.adapters.ProfileAdapter
+import com.example.employeemanagement.adapters.ProfileAdapter
 import com.example.employeemanagement.supporters.interfaces.Support
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
@@ -72,7 +72,7 @@ class ProfileFragment : Fragment(), Support {
      */
     private fun setProfile(){
         firebaseAdapter.employeesRefWithUid()
-            .addValueEventListener(object : GetValues(context){
+            .addValueEventListener(object : GetFirebaseValues(context){
                 override fun onDataChange(data: DataSnapshot) {
                     mBasicField = ArrayList()
                     mBasicValue = ArrayList()
@@ -87,8 +87,8 @@ class ProfileFragment : Fragment(), Support {
                     for (i in data.children){
                         val strFiled = i.key!!.trim()
                         val strValue = i.value.toString().trim()
-                        if (strFiled == "ImageUrl"){
-                            Log.i("Profile", "Do nothing with Image Url!")
+                        if (strFiled == "ImageUrl" || strFiled == "Messages"){
+                            Log.i("Profile", "Do nothing with Image Url && Messages!")
                         }
                         else if(strFiled == "Employee ID" ||strFiled == "Full Name" ||
                             strFiled == "Gender" || strFiled == "Position") {
@@ -132,7 +132,7 @@ class ProfileFragment : Fragment(), Support {
                 CropImage.activity()
                     .setAspectRatio(1,1)
                     .setCropShape(CropImageView.CropShape.OVAL)
-                    .start(activity as Activity)
+                    .start(context as Activity)
                 mProfileAdapte.notifyDataSetChanged()
             }
         }

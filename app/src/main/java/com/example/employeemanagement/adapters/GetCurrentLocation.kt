@@ -1,6 +1,6 @@
 
 
-package com.example.employeemanagement.models.adapters
+package com.example.employeemanagement.adapters
 
 import android.content.Context
 import android.content.Intent

@@ -27,7 +27,8 @@
             android:padding="10dp"
             android:enabled="false"
             android:layout_toLeftOf="@id/idLabel"
-            android:layout_toStartOf="@id/idLabel"/>
+            android:layout_toStartOf="@id/idLabel"
+            android:inputType="textImeMultiLine"/>
 
         <TextView
             android:layout_width="150dp"
@@ -52,7 +53,8 @@
         android:hint="Fullname"
         android:layout_marginTop="15dp"
         android:id="@+id/fullname"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:inputType="textImeMultiLine"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -69,7 +71,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_toLeftOf="@id/gmail_tail"
-            android:layout_toStartOf="@id/gmail_tail"/>
+            android:layout_toStartOf="@id/gmail_tail"
+            android:inputType="textImeMultiLine|textEmailAddress"/>
 
         <TextView
             android:id="@+id/gmail_tail"
@@ -96,7 +99,8 @@
         android:layout_marginTop="15dp"
         android:id="@+id/password"
         android:padding="10dp"
-        android:password="true"/>
+        android:password="true"
+        android:inputType="textImeMultiLine"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

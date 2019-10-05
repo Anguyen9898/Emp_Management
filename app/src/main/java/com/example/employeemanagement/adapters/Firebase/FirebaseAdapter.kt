@@ -1,4 +1,4 @@
-package com.example.employeemanagement.models.adapters
+package com.example.employeemanagement.adapters.Firebase
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -43,5 +43,9 @@ abstract class FireBaseAdapter: AppCompatActivity(), Support {
         return reference.child("Positions")
             .child("Staff")
             .child(getUid())
+    }
+
+    fun messageRef() : DatabaseReference{
+        return reference.child("Messages")
     }
 }

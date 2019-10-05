@@ -10,17 +10,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.employeemanagement.R
-import com.example.employeemanagement.models.adapters.FireBaseAdapter
-import com.example.employeemanagement.models.adapters.GetValues
-import com.example.employeemanagement.models.adapters.MessAdapter
+import com.example.employeemanagement.adapters.Firebase.FireBaseAdapter
+import com.example.employeemanagement.adapters.Firebase.GetFirebaseValues
+import com.example.employeemanagement.adapters.MessengerUserAdapter
+import com.example.employeemanagement.models.MessUserItemDetail
+import com.example.employeemanagement.supporters.interfaces.OnMessUserItemClick
 import com.google.firebase.database.DataSnapshot
 
 class MessengerFragment : Fragment() {
     private var mess_recycle : RecyclerView? = null
-    private lateinit var mNameList: ArrayList<String>
-    private lateinit var mMessList: ArrayList<String>
-    private lateinit var mImgUrlList: ArrayList<String>
-    private lateinit var mMessAdapter: MessAdapter
+    private lateinit var mList: ArrayList<MessUserItemDetail>
+    private var messUserItem: MessUserItemDetail? = null
+    private lateinit var mMessAdapter: MessengerUserAdapter
 
     private val firebaseAdapter = object : FireBaseAdapter(){}
 
@@ -30,49 +31,43 @@ class MessengerFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.frag_messenger, container, false)
 
-        mess_recycle = view.findViewById(R.id.mess_recycle)
+        mess_recycle = view.findViewById(R.id.mess_user_recycle)
         firebaseAdapter.mContext = context
-        setMessengersList()
+        setMessagesList()
         return view
     }
 
-    fun setMessengersList(){
-        mNameList = ArrayList()
-        mMessList = ArrayList()
-        mImgUrlList = ArrayList()
-
+    private fun setMessagesList(){
+        mList = ArrayList()
         firebaseAdapter.employeesReference()
-            .addValueEventListener(object : GetValues(context){
+            .addListenerForSingleValueEvent(object : GetFirebaseValues(context){
                 override fun onDataChange(data: DataSnapshot) {
                     data.children.forEach {
                         if(it.child("Account ID").value.toString().trim()
                             == firebaseAdapter.getUid()){
                             Log.i("Messenger", "Don't show current user")
                         }else{
-                            mNameList.add(it.child("Full Name").value.toString().trim())
-                            mImgUrlList.add(it.child("ImageUrl").value.toString().trim())
+                            val strFullName = it.child("Full Name")
+                                .value.toString().trim()
+                            val strImgUrl = it.child("ImageUrl")
+                                .value.toString().trim()
+                            val strAccountId = it.child("Account ID")
+                                .value.toString().trim()
+                            val strMesId = ""
+                            val strMessage = "Click to send new message"
 
-                            if (it.child("Messenger").exists())
-                                mMessList.add(it.child("Messenger").value.toString().trim())
-                            else
-                                mMessList.add("Click to send a new message")
+                            messUserItem = MessUserItemDetail(strMesId, strAccountId,
+                                strFullName, strMessage, strImgUrl)
+                            mList.add(messUserItem!!)
+
+                            val layoutManager = LinearLayoutManager(context)
+                            layoutManager.orientation = LinearLayoutManager.VERTICAL
+                            mMessAdapter = MessengerUserAdapter(context!!, mList)
+                            mess_recycle!!.layoutManager = layoutManager
+                            mess_recycle!!.adapter = mMessAdapter
                         }
                     }
-                    setRecycleView(mess_recycle, mNameList, mMessList, mImgUrlList)
                 }
             })
     }
-
-    /**
-     * Set RecycleView layout method
-     */
-    fun setRecycleView(view: RecyclerView?, list1: ArrayList<String>
-                       , list2: ArrayList<String>, list3: ArrayList<String>){
-        val layoutManager = LinearLayoutManager(context)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        mMessAdapter = MessAdapter(context!!, list1, list2, list3)
-        view!!.layoutManager = layoutManager
-        view.adapter = mMessAdapter
-    }
-
 }

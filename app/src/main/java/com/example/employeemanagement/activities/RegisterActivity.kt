@@ -8,10 +8,10 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import com.example.employeemanagement.R
-import com.example.employeemanagement.models.adapters.AccountAdapter
-import com.example.employeemanagement.models.adapters.EmployeesAdapter
-import com.example.employeemanagement.models.adapters.FireBaseAdapter
-import com.example.employeemanagement.models.adapters.GetValues
+import com.example.employeemanagement.adapters.Firebase.AccountFirebaseAdapter
+import com.example.employeemanagement.adapters.Firebase.EmployeesFirebaseAdapter
+import com.example.employeemanagement.adapters.Firebase.FireBaseAdapter
+import com.example.employeemanagement.adapters.Firebase.GetFirebaseValues
 import com.example.employeemanagement.supporters.interfaces.Support
 import com.google.firebase.database.*
 import kotlin.collections.HashMap
@@ -35,8 +35,9 @@ class RegisterActivity : FireBaseAdapter(), Support {
     private val TAG = "EmailPassword"
     private var employeeId = ""
 
-    private val account = AccountAdapter()
-    private val employees = EmployeesAdapter()
+    private val account = AccountFirebaseAdapter()
+    private val employees =
+        EmployeesFirebaseAdapter()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -161,7 +162,7 @@ class RegisterActivity : FireBaseAdapter(), Support {
 
     private fun setPositionsData(){
        employeesRefWithUid()
-           .addValueEventListener(object : GetValues(this){
+           .addValueEventListener(object : GetFirebaseValues(this){
             override fun onDataChange(data: DataSnapshot) {
                 val hashMap = HashMap<String, Any?>()
                 hashMap["Employee ID"] = data.child("Employee ID").value.toString()
@@ -184,7 +185,7 @@ class RegisterActivity : FireBaseAdapter(), Support {
     @SuppressLint("SetTextI18n")
     private fun getEmployeePos(){
         reference.child("Positions")
-            .addValueEventListener(object : GetValues(this){
+            .addValueEventListener(object : GetFirebaseValues(this){
                 override fun onDataChange(data: DataSnapshot) {
                     when (mExtras!!.getString("Position")) {
                         "Manager" -> empId.setText("M.E 000${data

@@ -1,5 +1,6 @@
-package com.example.employeemanagement.models.adapters
+package com.example.employeemanagement.adapters
 
+import com.example.employeemanagement.adapters.Firebase.FireBaseAdapter
 import com.example.employeemanagement.supporters.interfaces.Firebase
 import com.google.android.gms.tasks.Task
 import java.lang.Exception

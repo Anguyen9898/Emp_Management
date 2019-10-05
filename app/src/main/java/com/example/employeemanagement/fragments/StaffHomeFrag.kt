@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.example.employeemanagement.R
-import com.example.employeemanagement.models.adapters.FireBaseAdapter
-import com.example.employeemanagement.models.adapters.GetCurrentLocation
-import com.example.employeemanagement.models.adapters.StaffAdapter
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.example.employeemanagement.adapters.GetCurrentLocation
+import com.example.employeemanagement.adapters.StaffAdapter
 
 class StaffHomeFrag : GetCurrentLocation(null,
     null, null,

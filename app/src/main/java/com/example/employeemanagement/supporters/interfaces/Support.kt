@@ -10,11 +10,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.employeemanagement.R
-import com.example.employeemanagement.models.adapters.MessAdapter
-import com.example.employeemanagement.models.adapters.ProfileAdapter
 import com.google.android.gms.maps.model.LatLng
 import kotlin.math.pow
 

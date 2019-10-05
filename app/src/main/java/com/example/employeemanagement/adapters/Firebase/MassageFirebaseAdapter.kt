@@ -1,19 +1,17 @@
-package com.example.employeemanagement.models.adapters
+package com.example.employeemanagement.adapters.Firebase
 
 import android.annotation.SuppressLint
-import com.example.employeemanagement.supporters.interfaces.Firebase
 import com.google.android.gms.tasks.Task
 
 @SuppressLint("Registered")
-class EmployeesAdapter : FireBaseAdapter(), Firebase{
+class MassageFirebaseAdapter(var mesId : String): FireBaseAdapter() {
 
     private var setValueResult : Task<Void>? = null
     private var updateValueResult : Task<Void>? = null
 
-
     fun setEmpValue(hashMap: HashMap<String, Any?>) : Task<Void>?{
         try {
-            setValueResult = employeesRefWithUid().setValue(hashMap)
+            setValueResult = messageRef().child(mesId).setValue(hashMap)
         }
         catch (ex : Exception){
             setAlertDialog(mContext, "Error!", ex.message!!).apply {
@@ -23,14 +21,14 @@ class EmployeesAdapter : FireBaseAdapter(), Firebase{
             }.show()
         }
         finally {
-            employeesRefWithUid().onDisconnect()
+            messageRef().child(mesId).onDisconnect()
         }
         return setValueResult
     }
 
     fun updateEmpValue(hashMap: HashMap<String, Any?>) : Task<Void>?{
         try {
-            updateValueResult = employeesRefWithUid().updateChildren(hashMap)
+            updateValueResult = messageRef().child(mesId).updateChildren(hashMap)
         }
         catch (ex : Exception){
             setAlertDialog(mContext, "Error!", ex.message!!).apply {
@@ -40,7 +38,7 @@ class EmployeesAdapter : FireBaseAdapter(), Firebase{
             }.show()
         }
         finally {
-            employeesRefWithUid().onDisconnect()
+            messageRef().onDisconnect()
         }
         return updateValueResult
     }
